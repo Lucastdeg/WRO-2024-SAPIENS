@@ -1,6 +1,5 @@
-# Nicla Code
+# The Nicla is not being used for this Regional
 
-All the code used for the Nicla Vision
-Contains:
-Mention contents
+Therefore this directory is empty
+Please ignore this folder 
 
