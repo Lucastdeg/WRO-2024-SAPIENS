@@ -9,6 +9,11 @@ All the materials used for our solution
 1. 1 Arduino Nano Every
 2. 1 TB6612 H-Bridge (HW-166)
 3. 3 Ultrasonic Sensors (1 at the front, the other two right and left)
+4. 1 Small on/off switch
+5. 1 PushButton
+6. 2 Blue LEDS (1 for power, one for indication of the code)
+7. 1 Yellow LED (Indication of the code)
+8. 16 Proto Wires
 
 ## Contents
 - [Source Code](src/)
