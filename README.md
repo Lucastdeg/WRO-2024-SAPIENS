@@ -99,4 +99,19 @@ We used a Nicla Vision to detect the color of the obstacles, we made an algorith
 We connected the Nicla Vision with the Arduino Nano Every through the SCL and SDA signals. 
 When the Nicla Vision passes the information to the arduino about the color of the obstacle the arduino processes it and decides to turn left or right depending on whether the obstacle is red or green. 
 
+Here is how the components are connected:
 - [Wiring Diagrams](schemes/)
+
+Here are some pictures of the batteries and sensors that we use: 
+- [Batteries](v-photos/Electromechanical-Componen
+
+##Power Sections
+The battery power is separated in two parts. 
+One part feeds the Arduino Nano Every and the Ultrasonic Sensors with 5 volts. This part make use of the Mini Power Supply HW-131 to regulate the voltage. 
+The other part feeds the H-Bride TB6612 with 12 volts. 
+Of course, all grounds are connected, but the 12 volts are only supplied in one positive line, this is the line that feeds the H-Bridge. 
+Yet, this line connects to another positive line, but with the L7805 voltage regulator. This voltage regulator ensures that the servo and the power LED get 5 volts. Finally, the servo uses a capacitor to store energy in the case that the current demand is too high.
+
+""Note: We use a porta fusible for safety of a short circuit in the 12 volts outing. It is highly recomended that this is used as this lithium battery could lead to a very dangerous safety hazard if not managed carefully. 
+- [You can see the vehicle picture for reference](v-photos/)
+
