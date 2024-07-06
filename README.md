@@ -5,7 +5,7 @@ Throughout this read me make sure to link to other parts of the github,
 For example, I mention the strategy to dodge obstacles, I link the code module that covers that
 
 ## Engineering Materials
-All the materials used for our solution
+All the materials used to create our robot
 - 1 Arduino Nano Every (https://docs.arduino.cc/hardware/nano-every/)
 - 1 TB6612 H-Bridge (HW-166)
 - 3 Ultrasonic Sensors (1 at the front, the other two right and left)
