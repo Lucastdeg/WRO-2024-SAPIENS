@@ -6,9 +6,9 @@ For example, I mention the strategy to dodge obstacles, I link the code module t
 
 ## Engineering Materials
 All the materials used for our solution
-1. Also numbered
-2. Second material
-3. etc...
+1. 1 Arduino Nano Every
+2. 1 TB6612 H-Bridge (HW-166)
+3. 3 Ultrasonic Sensors (1 at the front, the other two right and left)
 
 ## Contents
 - [Source Code](src/)
