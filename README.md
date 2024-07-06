@@ -63,7 +63,7 @@ the equations used for speed
 Explaining different modules used and stuff
 Make sure to link 
 
-## ELectromechanical Components
+## Electromechanical Components
 Power source
 Sensors used
 How every electro mechanical component connects
