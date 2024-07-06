@@ -51,8 +51,8 @@ We integrated a Nicla vision with the arduino nano every to accurately detect co
 Directional Decision Making:
 Upon detecting the color green, the robot is programmed to turn left. Conversely, when red is detected, the robot turns right. This color-based decision-making process ensures that the robot navigates efficiently and avoids obstacles or follows a designated path based on the predefined color signals.
 
-Obstacle Detection and Avoidance:
-In addition to color detection, our robot is equipped with sensors to identify and dodge obstacles. When an obstacle is detected, the robot assesses the best path to avoid the obstacle, and then resumes its course, using the color signals to guide its direction. This dual approach of color-based navigation and obstacle avoidance enhances the robot’s ability to maneuver in complex environments.
+Border Detection and Turning:
+In addition to color detection, our robot is equipped with ultrasonic sensors to identify when and where it should turn. It uses an "umbral" which is a certain distance which if the robot pases, it will start to turn to a certain direction. That direction is decided by the other two ultrasonic sensors to the left and to the right.
 
 Implementation Details
 Code and Integration:
