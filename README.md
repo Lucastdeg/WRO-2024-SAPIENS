@@ -70,3 +70,4 @@ How every electro mechanical component connects
 Make sure to link the wiring diagram and all the pictures of the batteries and the sensors
 Also link the part of the code that covers sensors and detection
 Should mention Nicla here too
+- [Wiring Diagrams](schemes/)
