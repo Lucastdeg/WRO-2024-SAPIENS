@@ -6,14 +6,28 @@ For example, I mention the strategy to dodge obstacles, I link the code module t
 
 ## Engineering Materials
 All the materials used for our solution
-1. 1 Arduino Nano Every
-2. 1 TB6612 H-Bridge (HW-166)
-3. 3 Ultrasonic Sensors (1 at the front, the other two right and left)
-4. 1 Small on/off switch
-5. 1 PushButton
-6. 2 Blue LEDS (1 for power, one for indication of the code)
-7. 1 Yellow LED (Indication of the code)
-8. 16 Proto Wires
+- 1 Arduino Nano Every (https://docs.arduino.cc/hardware/nano-every/)
+- 1 TB6612 H-Bridge (HW-166)
+- 3 Ultrasonic Sensors (1 at the front, the other two right and left)
+- 1 Small on/off switch
+- 1 PushButton
+- 2 Blue LEDS (1 for power, one for indication of the code)
+- 1 Yellow LED (Indication of the code)
+- 2 resistors (360 Ohms) for code Indicator LEDS
+- 16 Proto Wires
+- 33 Rigid Wires (Hand cut)
+- 2 Ceramic Capacitor 104
+- 1 Capacitor 100 25-50V
+- 1 Voltage Regulator L7805
+- 1 Mini Power Supply HW-131 (Also works as voltage regulator) 5V and 3.3V2
+- 1 Porta Fusibles
+- 12V Battery 3S (18650 + BMS + 2 cable outings) (more about this can be seen in the electromehcanical components)
+- 1 Chasis (DC Auto) This includes:
+    - 4 Wheels
+    - 1 Motor (more about this explained in other sections)
+    - 1 Servo
+- Multiple 3d pieces whih can be found in the following directory
+[3d_files](models/3D_files/)
 
 ## Contents
 - [Source Code](src/)
