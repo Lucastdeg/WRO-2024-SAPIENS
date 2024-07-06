@@ -89,4 +89,11 @@ How every electro mechanical component connects
 Make sure to link the wiring diagram and all the pictures of the batteries and the sensors
 Also link the part of the code that covers sensors and detection
 Should mention Nicla here too
+
+A lithium battery pack is being used in 3S1P configuration where 2 batteries are in parallel and then this pack is in series with the 2 batteries, to give a total of 12.6 Volts with 1900mAh capacity, together with the help of a BMS to manage the power input and output.
+From this battery pack we are getting two cables, of which one has a male terminal and the other has a female terminal.
+
+4 ultrasonic arduino sensors HC-SRO4 are being used. This economical sensor provides 2cm to 400cm of non-contact measurement functionality with a ranging accuracy that can reach up to 3mm. Each HC-SR04 module includes an ultrasonic transmitter, a receiver and a control circuit. There are only four pins that you need to worry about on the HC-SR04: VCC (Power), Trig (Trigger), Echo (Receive), and GND (Ground).
+
+
 - [Wiring Diagrams](schemes/)
