@@ -47,6 +47,15 @@ For our robotics competition, we developed an innovative navigation solution tha
 
 To enhance our robot's awareness and maneuverability, we integrated four ultrasonic sensors—three positioned at the front and one at the back. These sensors provide real-time distance measurements, enabling the robot to detect and avoid obstacles from multiple directions. Our approach demonstrates the synergy of vision technology, ultrasonic sensing, and precise control algorithms, resulting in a responsive and reliable robotic solution.
 
+## Mobility 
+Explain how we managed the mobility
+Link the chasis and models
+The design for the steer
+Make sure to include the problem we faced with the angle range
+how it is 80-120 but 90 is stationary
+Also include the speed management
+the equations used for speed
+
 ## Strategy
 Explain what strategy we used for our solution
 Make sure to link code here and mention how we detected and dodged the obstacles
@@ -75,15 +84,6 @@ Conclusion
 Our solution leverages the capabilities of Arduino's vision system to create a responsive and efficient navigation strategy. By combining color detection with obstacle avoidance, our robot can intelligently navigate its environment, making it well-suited for the challenges of the competition.
 
 This approach not only demonstrates the effectiveness of integrating vision with control systems but also highlights the importance of robust algorithms in achieving reliable performance in dynamic conditions.
-
-## Mobility 
-Explain how we managed the mobility
-Link the chasis and models
-The design for the steer
-Make sure to include the problem we faced with the angle range
-how it is 80-120 but 90 is stationary
-Also include the speed management
-the equations used for speed
 
 ## Code Explanation
 Explaining different modules used and stuff
