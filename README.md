@@ -30,7 +30,14 @@ All the materials used to create our robot
 [3d_files](models/3D_files/)
 
 ## Contents
-- [Source Code](src/)
+- [Models](models/) This directory contains all used 3d models
+- [Other](other/) This directory is empty for now, as no miscellancious files have had to be added
+- [Process](process/) This directory will be completed for the national as it will contain the process that it took for us to get there
+- [Schemes](schemes/) All wiring diagrams can be found in this directory
+- [Source Code](src/) This directory contains all the code used in this proyect
+- [Team Photos](t-photos/) The official Team photos can be found here
+- [Performance Videos](videos/) The robot Performance videos for each challenge
+- [Vehicle Pictures](v-photos/) All vehicle photos can be found in this directory, including some individual components
 This is just a test to see if content linking works
 
 ## Introduction
