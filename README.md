@@ -29,6 +29,11 @@ All the materials used to create our robot
 - Multiple 3d pieces whih can be found in the following directory
 [3d_files](models/3D_files/)
 
+## Building instructions
+Chasis (Motors and base): https://mp.weixin.qq.com/s/dOADMsXeo7Lxebgg0yiY5Q
+Electronics (Circuit and battery): [The circuit diagram can be found in the schemes directory](schemes/)
+Code (For the arduino): [The source code can be found in the src directory](src/)
+
 ## Contents
 - [Models](models/) This directory contains all used 3d models
 - [Other](other/) This directory is empty for now, as no miscellancious files have had to be added
