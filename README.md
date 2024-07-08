@@ -29,6 +29,11 @@ All the materials used to create our robot
 - Multiple 3d pieces whih can be found in the following directory
 [3d_files](models/3D_files/)
 
+## Building instructions
+- Chasis (Motors and base): https://mp.weixin.qq.com/s/dOADMsXeo7Lxebgg0yiY5Q
+- Electronics (Circuit and battery): [The circuit diagram can be found in the schemes directory](schemes/)
+- Code (For the arduino): [The source code can be found in the src directory](src/)
+
 ## Contents
 - [Models](models/) This directory contains all used 3d models
 - [Other](other/) This directory is empty for now, as no miscellancious files have had to be added
@@ -46,6 +51,15 @@ Brief intro on our solution
 For our robotics competition, we developed an innovative navigation solution that leverages Arduino's vision capabilities to detect and respond to color signals. By utilizing a camera module, our robot can identify green and red colors, which dictate its turning directions—left for green and right for red. This color-based navigation system is complemented by a comprehensive obstacle detection and avoidance mechanism.
 
 To enhance our robot's awareness and maneuverability, we integrated four ultrasonic sensors—three positioned at the front and one at the back. These sensors provide real-time distance measurements, enabling the robot to detect and avoid obstacles from multiple directions. Our approach demonstrates the synergy of vision technology, ultrasonic sensing, and precise control algorithms, resulting in a responsive and reliable robotic solution.
+
+## Mobility 
+Explain how we managed the mobility
+Link the chasis and models
+The design for the steer
+Make sure to include the problem we faced with the angle range
+how it is 80-120 but 90 is stationary
+Also include the speed management
+the equations used for speed
 
 ## Strategy
 Explain what strategy we used for our solution
@@ -75,15 +89,6 @@ Conclusion
 Our solution leverages the capabilities of Arduino's vision system to create a responsive and efficient navigation strategy. By combining color detection with obstacle avoidance, our robot can intelligently navigate its environment, making it well-suited for the challenges of the competition.
 
 This approach not only demonstrates the effectiveness of integrating vision with control systems but also highlights the importance of robust algorithms in achieving reliable performance in dynamic conditions.
-
-## Mobility 
-Explain how we managed the mobility
-Link the chasis and models
-The design for the steer
-Make sure to include the problem we faced with the angle range
-how it is 80-120 but 90 is stationary
-Also include the speed management
-the equations used for speed
 
 ## Code Explanation
 Explaining different modules used and stuff
