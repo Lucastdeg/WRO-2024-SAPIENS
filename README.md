@@ -41,7 +41,7 @@ All the materials used to create our robot
 - [Schemes](schemes/) All wiring diagrams can be found in this directory
 - [Source Code](src/) This directory contains all the code used in this proyect
 - [Team Photos](t-photos/) The official Team photos can be found here
-- [Performance Videos](videos/) The robot Performance videos for each challenge
+- [Performance Videos](p-videos/) The robot Performance videos for each challenge
 - [Vehicle Pictures](v-photos/) All vehicle photos can be found in this directory, including some individual components
 This is just a test to see if content linking works
 
