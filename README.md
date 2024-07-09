@@ -61,6 +61,19 @@ how it is 80-120 but 90 is stationary
 Also include the speed management
 the equations used for speed
 
+Our robot uses an Ackerman steering system, with this steering system we can make our robot do the turns that have to be done during the 3 rounds. But because of the shape of our chassis and the type of steering system we use, our robot can only turn up to a certain point. In the case of turning to the right, it can only turn 30 degrees and in the left one it can only turn 10 degrees.
+
+Here you can see the shape of the chassis of our robot as a guide:
+- [Chassis of our robot](v-photos/) 
+
+Some of the problems we faced with the steering system is that we had to come up with a way for the robot to make the turns neither too tight nor too wide, to fix this we use ultrasonic sensors on the front, right and left side of the front of the robot that are detecting how far it started and how many degrees it has to move forward while it is turning. For example during the open challenge round we made the robot turn when one of the ultrasonic sensors on one of the sides stops detecting or detects a greater distance than it had detected during the straight line, the sensor that performs this action depends on whether it is the one on the right or left, when it is the one on the right is when the round is being performed clockwise and when it is the one on the left when it is counterclockwise. 
+
+Meanwhile the servo motor is at 80 degrees the robot will turn to the left, so if it is at 120 degrees the robot will turn to the right, but you think that when the servo motor is at 100 degrees it will be in a position in which the wheels will be straight, this thought is incorrect because when the servo is at 100 degrees it will be slightly turning to the right, then we ask two questions, the first one is: So how many degrees should be the servo motor so that the robot wheels are straight? To answer this question, the degrees that the servo must be at for the wheels to be straight is 90 degrees, and this is where the second question comes in, which is: Why when the servo is at 90 degrees will the wheels be straight, if when the servo was at 80 degrees the robot would turn to the left and when the servo was at 120 degrees the robot would turn to the right, if the degrees that are in between these two numbers of degrees are 100 degrees? Well to answer this question, the 90 degree position is considered "straight" or "neutral" in many servo motor systems because it is the preconfigured standard in many servos to indicate that there is no deviation to the left or right and because of how we have the servo positioned with the chassis we are using and the Ackerman steering system our steering only goes from 80 to 120 degrees.
+
+For the speed management part, our robot is generally going to go at ... speed on straight lines, while it is rotating it will go at ... of speed.
+
+As for the equations we use 2 formulas, between the 2 formulas we have the turning time, this establishes that the speed that we are using during the turn, that is .... We are going to divide it by 100 and the result we are going to multiply it by 1000 and this would give us the time during which we are going to rotate in milliseconds; the second formula is about the angle of rotation in this we are going to divide the speed by the result of the previous formula, then this result we are going to multiply it by 130 and the result that this formula gives us we are going to subtract it to another 130 and the result of this subtraction is going to give us the angle with which we are going to rotate. We use these formulas to make the turns between sections. 
+
 ## Strategy
 Explain what strategy we used for our solution
 Make sure to link code here and mention how we detected and dodged the obstacles
