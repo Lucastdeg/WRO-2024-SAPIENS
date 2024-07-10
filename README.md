@@ -50,14 +50,6 @@ For our robotics competition, we developed an innovative navigation solution tha
 To enhance our robot's awareness and maneuverability, we integrated four ultrasonic sensors—three positioned at the front and one at the back. These sensors provide real-time distance measurements, enabling the robot to detect and avoid obstacles from multiple directions. Our approach demonstrates the synergy of vision technology, ultrasonic sensing, and precise control algorithms, resulting in a responsive and reliable robotic solution.
 
 ## Mobility 
-Explain how we managed the mobility
-Link the chasis and models
-The design for the steer
-Make sure to include the problem we faced with the angle range
-how it is 80-120 but 90 is stationary
-Also include the speed management
-the equations used for speed
-
 Our robot uses an Ackerman steering system, with this steering system we can make our robot do the turns that have to be done during the 3 rounds. But because of the shape of our chassis and the type of steering system we use, our robot can only turn up to a certain point. In the case of turning to the right, it can only turn 30 degrees and in the left one it can only turn 10 degrees.
 
 Here you can see the shape of the chassis of our robot as a guide:
