@@ -1,9 +1,6 @@
 # WRO-2024-SAPIENS
 WRO-2024-SAPIENS
 
-Throughout this read me make sure to link to other parts of the github, 
-For example, I mention the strategy to dodge obstacles, I link the code module that covers that
-
 ## Engineering Materials
 All the materials used to create our robot
 - 1 Arduino Nano Every (https://docs.arduino.cc/hardware/nano-every/)
@@ -75,9 +72,6 @@ For the speed management part, our robot is generally going to go at ... speed o
 As for the equations we use 2 formulas, between the 2 formulas we have the turning time, this establishes that the speed that we are using during the turn, that is .... We are going to divide it by 100 and the result we are going to multiply it by 1000 and this would give us the time during which we are going to rotate in milliseconds; the second formula is about the angle of rotation in this we are going to divide the speed by the result of the previous formula, then this result we are going to multiply it by 130 and the result that this formula gives us we are going to subtract it to another 130 and the result of this subtraction is going to give us the angle with which we are going to rotate. We use these formulas to make the turns between sections. 
 
 ## Strategy
-Explain what strategy we used for our solution
-Make sure to link code here and mention how we detected and dodged the obstacles
-
 Strategy Explanation
 Color Detection with Arduino:
 We integrated a Nicla vision with the arduino nano every to accurately detect colors. This system allows the robot to recognize green and red colors, which serve as signals to turn left or right, respectively. By using a camera module and appropriate color detection algorithms, the robot can continuously monitor its environment and respond in real time.
@@ -108,13 +102,6 @@ Explaining different modules used and stuff
 Make sure to link 
 
 ## Electromechanical Components
-Power source
-Sensors used
-How every electro mechanical component connects
-Make sure to link the wiring diagram and all the pictures of the batteries and the sensors
-Also link the part of the code that covers sensors and detection
-Should mention Nicla here too
-
 A lithium battery pack is being used in 3S1P configuration where 2 batteries are in parallel and then this pack is in series with the 2 batteries, to give a total of 12.6 Volts with 1900mAh capacity, together with the help of a BMS to manage the power input and output.
 From this battery pack we are getting two cables, of which one has a male terminal and the other has a female terminal.
 
