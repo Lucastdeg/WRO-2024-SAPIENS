@@ -12,7 +12,8 @@ All the materials used to create our robot
 - 1 Yellow LED (Indication of the code)
 - 2 resistors (360 Ohms) for code Indicator LEDS
 - 16 Proto Wires
-- 33 Rigid Wires (Hand cut)
+- 31 Rigid Wires (Hand cut)
+- 2 Big Rigid Wires
 - 2 Ceramic Capacitor 104
 - 1 Capacitor 100 25-50V
 - 1 Voltage Regulator L7805
