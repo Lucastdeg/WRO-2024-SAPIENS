@@ -5,7 +5,7 @@ WRO-2024-SAPIENS
 All the materials used to create our robot
 - 1 Arduino Nano Every (https://docs.arduino.cc/hardware/nano-every/)
 - 1 TB6612 H-Bridge (HW-166)
-- 3 Ultrasonic Sensors (1 at the front, the other two right and left)
+- 4 Ultrasonic Sensors (1 at the front, 1 at the back, the other two right and left)
 - 1 Small on/off switch
 - 1 PushButton
 - 2 Blue LEDS (1 for power, one for indication of the code)
