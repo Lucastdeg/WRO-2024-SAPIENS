@@ -66,7 +66,7 @@ public:
     }
     
     // Defining final servo position
-    float Servo_Pos = 88 + F_Correction;
+    float Servo_Pos = 85 + F_Correction;
     // 90 is the where it should stay
 
     if (Servo_Pos < 70){
@@ -130,7 +130,7 @@ void loop() {
 
   for(int i=0; i<12; i++){
     acelerar_recto(85, 120);
-    auto_giro(100);
+    auto_giro(134);
   }
   
   delay(500);
@@ -150,7 +150,7 @@ void acelerar_recto(float umbral, int v){
   // Regulator regular(0.43, -0.07, 40);
   Regulator regular(0.15, -0.01, 40);
 
-  while(dis_F_actual > umbral+8){
+  while(dis_F_actual > umbral+2){
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
     analogWrite(ENA, v);
@@ -179,7 +179,7 @@ void acelerar(int v){
 }
 
 void auto_giro(int v){
-  float time = 1200 * (v/100);
+  float time = 1380 * (v/100);
   float angle;
 
   float dis_R_actual = medir_distancia('R');
@@ -190,13 +190,13 @@ void auto_giro(int v){
   delay(5);
   digitalWrite(Light2, HIGH);
   if(dis_R_actual > dis_L_actual){
-    float angle = max_R_angle - (max_R_angle * v/time);
-    myservo.write(angle-5);
+    float angle = max_R_angle - (max_R_angle * v/1000);
+    myservo.write(angle-4);
     delay(10);
   }
   else{
-    float angle = max_L_angle - (max_L_angle * v/time);
-    myservo.write(angle-5);
+    float angle = max_L_angle - (max_L_angle * v/1000);
+    myservo.write(angle-4);
     delay(10);
   }
   acelerar(v);
@@ -206,6 +206,7 @@ void auto_giro(int v){
 
   float dis_LAT_tem = medir_distancia('R') + medir_distancia('L');
   while(dis_LAT_tem < 120 and dis_LAT_tem > 80){
+    acelerar(v)
     myservo.write(84);
     delay(20);
     myservo.write(86);
