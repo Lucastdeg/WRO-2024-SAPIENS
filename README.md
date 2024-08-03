@@ -8,11 +8,10 @@ All the materials used to create our robot
 - 4 Ultrasonic Sensors (1 at the front, 1 at the back, the other two right and left)
 - 1 Small on/off switch
 - 1 PushButton
-- 2 Blue LEDS (1 for power, one for indication of the code)
-- 1 Yellow LED (Indication of the code)
+- 1 Blue LEDS (1 for power, one for indication of the code)
 - 2 resistors (360 Ohms) for code Indicator LEDS
-- 16 Proto Wires
-- 31 Rigid Wires (Hand cut)
+- 25 Proto Wires
+- 34 Rigid Wires (Hand cut)
 - 2 Big Rigid Wires
 - 2 Ceramic Capacitor 104
 - 1 Capacitor 100 25-50V
