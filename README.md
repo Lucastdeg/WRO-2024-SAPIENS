@@ -94,7 +94,7 @@ In order to enact our strategy and enable our robot to complete each phase, our 
 
 The src directory is divided into 3 sections, Arduino Code, Nicla Code, and Other. This text will focus on the Arduino code as the Nicla is currently not being used. [The Arduino Code Directory](src/Arduino Code/) is divided in 2 sections, phase 1 and phase 2. At the time of writing, only phase 1 has been completed, that being said, our proyect is still in development, and in the near future it will be added to the github. 
 
-[Phase 1](src/Arduino Code/Phase 1/):
+[Phase 1](src/Arduino_Code/Phase_1):
 Phase 1 contains multiple programs to show how our code has changed, the main code is called newcodephase1
 
 - The program starts by defining all variables and importing all libraries, this include, all pins (except the two Led indicators), the max angle for the servo, and some other useful variables.
@@ -117,7 +117,11 @@ Phase 1 contains multiple programs to show how our code has changed, the main co
 
  - When the for loop ends, the breaking function (whichs stops the robot) sets in and the robot stops.
 
-[Phase 2](src/Arduino Code/Phase 2/):
+[Phase 2](src/):
+Phase 2 consists of two different programs, one for the arduino nano every, and one for the nicla vision. Check each of their respective directories to see the code. Since the code is not finished and is pretty minimal right now, only the explanation for the integration can be fully developed
+- The integration uses the wire library to connect the Nicla Vision and Nano every. It connects them bya I2C, or SCl and SDA connection. In both programs, the baudrate is set to 100000 and the address is set to the number 8. In the code it can be seen how the Nicla Vision is set to be the master, this means that the nicla vision will send information to the nano every and the nano every will respond to that information. If the nano every was the master, it would ask the nicla vision for information and it would use that information accordingly. 
+
+- Currently, the Nicla Vision sends 0 if it detects green, and 1 if it detects red, when it send information, the nano every starts the recieveEvent function which processes the information and reacts accordingly
 
 ## Electromechanical Components
 A lithium battery pack is being used in 3S1P configuration where 2 batteries are in parallel and then this pack is in series with the 2 batteries, to give a total of 12.6 Volts with 1900mAh capacity, together with the help of a BMS to manage the power input and output.
