@@ -136,6 +136,12 @@ When the Nicla Vision passes the information to the arduino about the color of t
 Here is how the components are connected:
 - [Wiring Diagrams](schemes/)
 
+Unfortunately the Nicla Vision we used could not be found or obtained in the application we used for this reason we could not include it in the wiring diagram. But here is how the Nicla Vision is connected to the Arduino Nano Every:
+-SDA from the Nicla Vision to pin D18 (SDA) of the Nano Every.
+-SCL from the Nicla Vision to the D19 pin (SCL) of the Nano Every
+-GND from the Nicla Vision to GND of the Nano Every
+-VIN from the Nicla Vision to the 5V+ pin of the Nano Every
+
 Here are some pictures of the batteries and sensors that we use: 
 - [Batteries](v-photos/Electromechanical-Components/)
 
