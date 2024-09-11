@@ -118,10 +118,18 @@ Phase 1 contains multiple programs to show how our code has changed, the main co
  - When the for loop ends, the breaking function (whichs stops the robot) sets in and the robot stops.
 
 [Phase 2](src/):
-Phase 2 consists of two different programs, one for the arduino nano every, and one for the nicla vision. Check each of their respective directories to see the code. Since the code is not finished and is pretty minimal right now, only the explanation for the integration can be fully developed
-- The integration uses the wire library to connect the Nicla Vision and Nano every. It connects them bya I2C, or SCl and SDA connection. In both programs, the baudrate is set to 100000 and the address is set to the number 8. In the code it can be seen how the Nicla Vision is set to be the master, this means that the nicla vision will send information to the nano every and the nano every will respond to that information. If the nano every was the master, it would ask the nicla vision for information and it would use that information accordingly. 
+Phase 2 consists of two different programs, one for the arduino nano every, and one for the nicla vision. Check each of their respective directories to see the code. The code for the nicla vision will be covered first, it focuses primarily on the color detection, but it also has the necessary integration modules to pass the information onto the nano every.
 
-- Currently, the Nicla Vision sends 0 if it detects green, and 1 if it detects red, when it send information, the nano every starts the recieveEvent function which processes the information and reacts accordingly
+First of all let's cover the integration:
+- The integration uses the wire library to connect the Nicla Vision and Nano every. It connects them bya I2C, or SCl and SDA connection. In both programs, the baudrate is set to 100000 and the address is set to the number 8. In the code it can be seen how the Nicla Vision is set to be the slave, this means that the nicla vision will send information to the nano every when it is called, if it was the other way around (like it previously was) the nano every would be called by the nicla vision.
+
+Next is the color detection:
+- The nicla vision will send 0 to the arduino nano every if it is green and 1 if it is red. It detects the colors by using the blob function integrated into openmv. The blob function contains parameters to define the sensitivity of the detection. It is based on the pixel count, the pixel area count and the intensity of the color. Two lists of different types of green and red are supplied to the function so that the camera can identify the color it is looking for. To determine the color that is going to be sent, the areas of all the detected blobs are added for red and for green. The one with the largest amount of area (the biggest amount of pixels) is the one the robot detects. Now, sometimes there will be no blocks in front of the robot, to detect this, we set a lower boundary of around 400 pixels, so if the total area is less than 400, no colors will be sent back to the robot.
+
+Now, how do we utilize the 0s and 1s that we will recieve from the nicla vision?
+For that we need to undertsand the arduino nano every's code:
+- The code for phase 2 is  
+
 
 ## Electromechanical Components
 A lithium battery pack is being used in 3S1P configuration where 2 batteries are in parallel and then this pack is in series with the 2 batteries, to give a total of 12.6 Volts with 1900mAh capacity, together with the help of a BMS to manage the power input and output.
