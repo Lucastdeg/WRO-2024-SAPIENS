@@ -128,7 +128,9 @@ Next is the color detection:
 
 Now, how do we utilize the 0s and 1s that we will recieve from the nicla vision?
 For that we need to undertsand the arduino nano every's code:
-- The code for phase 2 is  
+- The code for phase 2 is vaguely based off of the code for phase 1, it uses a similar turn that measures the length of both ultrasonic sensors, the difference is it has an initial turn based on time. Besides from that it uses 2 functions to dodge left and right based on the readings of ultrasonic sensors. Before that though, it has to detect the color thats in front of the robot, it does this by calling the nicla vision and defining a variable as 0 or 1, (if there is no color it gets defined as 2). Then it dodges left or right depending on the reading and after that it will start going in alternating directions, by that it means if it detects red initially, it will go green next, and then red, alternating (as this pattern will always be present).
+
+- This repeats until the robot crashes as we unfortunately, did not have time to do phase 3.
 
 
 ## Electromechanical Components
