@@ -11,8 +11,14 @@ bool go = false;
 float R_tem;
 float L_tem;
 
-bool turn_direction;
+bool first_forwards = true;
 
+bool turn_direction;
+bool startsred = true;
+
+int col = 2;
+
+int count_laps = 0;
 //Ultrasonic pins:
 const int ultra_R_echo = 7;
 const int ultra_R_trig = 8;
@@ -98,9 +104,8 @@ void setup() {
   //Comunication setup:
   //Comunication setup:
   Serial.begin(100000);
-  Wire.begin(8);
+  Wire.begin();
   pinMode(5, INPUT);
-  Wire.onReceive(receiveEvent);
 
   //motor pin setup:
   for(int i = 2; i<5; i++){
@@ -126,155 +131,219 @@ void setup() {
 
 void loop() {
 
-  //float dis_F_inicial = medir_distancia('F');
+  while(go == false){
+    if(digitalRead(5)) go = true;
+    delay(100);
+  }
+
+  float dis_F_inic = medir_distancia('F');
   //float dis_R_inicial = medir_distancia('R');
   //float dis_L_inicial = medir_distancia('L');
 
-  delay(100);
-  //first_turn(110, 86, 179);
+  //delay(100);
 
 
+  // 1 if red 0 if green
+  if (dis_F_inic > 130){
+    col = 2;
+  }else{
+    col = receiveColor();
+  }
+ 
 
-  //if (turn_direction) {
-    //for(int i=0; i<70; i++){
+  // First check that gets direction and dodges in case of immeadite obstacle
+  if (first_forwards) {
+    first_dodge(col);
+  } 
 
-      //change this to an infinite loop next time to check
-      //first_turn(110, 88, 176);
-      //delay(400);
-      //left_forwards(100, 80); //speed, umbral
-      //left_turn(105, 60, 1400); //speed, angle, time
-      //eventually add save crash Im adding this comment here so you dont forget
-    //}
-  //}
-  //else {
-   // for(int i=0; i<70; i++){
-    //  first_turn(110, 88, 176);
-      //delay(500);
-      //breaking(3000);
-      //left_forwards(100, 80); //speed, umbral
-      //left_turn(105, 60, 1400); //speed, angle, time
-      //eventually add save crash Im adding this comment here so you dont forget
-    //}
-  //}
-  
-  //breaking(100);
+  if (startsred and turn_direction) {
+    left_turn_end(130, 60, 950);
+    align_back(120, 80);
 
-  //delay(500);
+  }
+  if (startsred and !turn_direction) {
+    left_turn_end(130, 125, 950);
+    align_back(120, 80);
+
+  }
+  col = receiveColor();
+
+
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
+  delay(10000);
   //go = false;
 
 }
 
-void first_turn(int v, int umbral1, int umbral2) {
-  float dis_F_tem = medir_distancia('F');
-  float dis_B_tem = medir_distancia('B');
-  float umbralbase = umbral1;
-  R_tem = medir_distancia('R');
-  L_tem = medir_distancia('L');
-
-  Regulator regular(0.21, 0, 45, 84); // 0.14
-
-
-  while (dis_F_tem > umbral1 and dis_B_tem < umbral2) {
-
-    digitalWrite(IN1, HIGH);
-    digitalWrite(IN2, LOW);
+void align_back(int v, int umbral) {
+  float temp_back = medir_distancia('B');
+  while(temp_back > umbral) {
+    digitalWrite(IN1, LOW);
+    digitalWrite(IN2, HIGH);
     analogWrite(ENA, v);
     delay(20);
-    float posicion = regular.Steer(R_tem, L_tem);
-
-    myservo.write(posicion);
-
-
-    if (medir_distancia('L') > 150 or medir_distancia('R') > 150) {
-      break;
-    }
-    L_tem = medir_distancia('L');
-    R_tem = medir_distancia('R');
-    dis_F_tem = medir_distancia('F');
-    dis_B_tem = medir_distancia('B');
-
-    if (medir_distancia('R') < 20 or medir_distancia('L') < 20) {
-      umbral1 = umbralbase - 5;
-    } else {
-      umbral1 = umbralbase;
-    }
-
-    save_crash(v);
+    temp_back = medir_distancia('B');
   }
+}
 
-  if (medir_distancia('L') > medir_distancia('R')) {
+
+void first_dodge(int color) {
+
+  if (color == 1) { // red
+    dodge_right(128, 80, 900, 18);
+    startsred = true;
+
+  } else if (color == 0) {
+    dodge_left(128, 80, 800, 18);
+    startsred = false;
+    
+  } else {
+    float dis_F_tem = medir_distancia('F');
+
+    while (dis_F_tem > 90) {
+      digitalWrite(IN1, HIGH);
+      digitalWrite(IN2, LOW);
+      analogWrite(ENA, 130);
+      delay(20);
+
+      myservo.write(86);
+      dis_F_tem = medir_distancia('F');
+    }
+    startsred = true; // let luck decide
+      // move forwards and turn
+
+  }
+  float dis_R_inicial = medir_distancia('R');
+  float dis_L_inicial = medir_distancia('L');
+
+  if (dis_R_inicial > dis_L_inicial) {
+    turn_direction = false;
+  } else {
     turn_direction = true;
   }
-  else {
-    turn_direction = false;
-  }
-  if (turn_direction) {
-    left_turn(v, 60, 0);
-  } 
-  else {
-    left_turn(v, 60, 0);
-    // This should be right turn
-  }
 
-
-}
-
-void left_forwards(int v, int umbral) {
-  float dis_F_tem = medir_distancia('F');
-  R_tem = medir_distancia('R');
-  L_tem = medir_distancia('L');
-
-  Regulator regular(0.18, 0, 45, 86);
-
-  myservo.write(86);
-
-  while (dis_F_tem > umbral) {
-
-    digitalWrite(IN1, HIGH);
-    digitalWrite(IN2, LOW);
-    analogWrite(ENA, v);
-
-    float posicion = regular.Steer(R_tem, L_tem);
-
-    myservo.write(posicion);
-
-
-    if (medir_distancia('L') > 95 or medir_distancia('R') > 95) {
-      break;
-    }
-    L_tem = medir_distancia('L');
-    R_tem = medir_distancia('R');
-    dis_F_tem = medir_distancia('F');
-  }
-}
-
-void left_turn(int v, int angle, int time) {
-  float kp = 4;
-  // time = get_time(v, time, R_tem, L_tem, 4, turn_direction); // velocity, base time, right reading, left reading, kp the bigger the more effect
-
-  myservo.write(angle);
   
+  myservo.write(86);
+}
+
+float proportional_right(float kp, float target, int stationary) {
+  float error;
+  error = medir_distancia('R') - target;
+  float returnval = stationary + (error*kp);
+  
+  if (returnval > 120){
+    return 120;
+  } else {
+    return returnval;
+  }
+
+
+}
+
+float proportional_left(float kp, float target, int stationary) {
+  float error;
+  error = medir_distancia('L') - target;
+
+  float returnval = stationary - (error*kp);
+
+  if (returnval < 70){
+    return 70;
+  } else {
+    return returnval;
+  }
+
+}
+
+void dodge_right(int v, int umbral1, int time, float target) {
+  float dis_F_tem = medir_distancia('F');
+  float dis_R_tem = medir_distancia('R');
+
   float count = time/20;
-  while (count > 0) {
+
+  while ((count > 0 and dis_R_tem > 10)) {
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
-    analogWrite(ENA, v);
+    analogWrite(ENA, v+15);
     delay(20);
+
+    myservo.write(proportional_right(0.8, target, 85));
+    dis_R_tem = medir_distancia('R');
+    dis_F_tem = medir_distancia('F');
     count = count-1;
   }
+  myservo.write(75);
+  while(dis_F_tem > umbral1) {
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    analogWrite(ENA, v+4);
+    delay(20);
+    dis_F_tem = medir_distancia('F');
+  }
 
-  left_turn_end(v, angle);
-
-  
+  myservo.write(86);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
 
 }
 
-void left_turn_end(int v, int angle) {
+
+void dodge_left(int v, int umbral1, int time, float target) {
+  float dis_F_tem = medir_distancia('F');
+  float dis_L_tem = medir_distancia('L');
+
+  float count = time/20;
+
+  while ((count > 0 and dis_L_tem > 10)) {
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    analogWrite(ENA, v+15);
+    delay(20);
+
+    myservo.write(proportional_left(0.65, target, 85));
+    dis_L_tem = medir_distancia('R');
+    dis_F_tem = medir_distancia('F');
+    count = count-1;
+  }
+  analogWrite(ENA, v+4);
+  myservo.write(125);
+  delay(350);
+  while(dis_F_tem > umbral1) {
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    analogWrite(ENA, v+4);
+    delay(20);
+    dis_F_tem = medir_distancia('F');
+  }
+
+  myservo.write(86);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
+
+}
+
+
+
+
+// FUNCTION TO USE DOWN HERE AND UP HERE
+
+void left_turn_end(int v, int angle, int time) {
+
+  myservo.write(angle);
+
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, v);
+  delay(time);
+
   float R = medir_distancia('R');
   float L = medir_distancia('L');
   float add = R+L;
 
-  while (add > 105 or add < 20) {
+  while (add > 105 or add < 70) {
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
     analogWrite(ENA, v);
@@ -289,6 +358,14 @@ void left_turn_end(int v, int angle) {
     add = R+L;
     
   }
+
+  myservo.write(angle);
+
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, v);
+  delay(700);
+  myservo.write(86);
 
 }
 
@@ -321,6 +398,47 @@ void right_turn(int v, int angle, int time) {
   acelerar(v);
   delay(time);
 
+  //right_turn_end(134, 125);
+
+}
+
+void right_turn_end(int v, int angle, int time) {
+
+  myservo.write(angle);
+
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, v);
+  delay(time);
+
+  float R = medir_distancia('R');
+  float L = medir_distancia('L');
+  float add = R+L;
+
+  while (add > 105 or add < 70) {
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    analogWrite(ENA, v);
+    delay(112); // 120
+    myservo.write(angle);
+    angle = angle - 1;
+    if (angle < 88) {
+      angle = 88;
+    }
+    R = medir_distancia('R');
+    L = medir_distancia('L');
+    add = R+L;
+    
+  }
+
+  myservo.write(angle);
+
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, v);
+  delay(700);
+  myservo.write(86);
+
 }
 
 float get_time(int v, int base_time, float R, float L, float kp, bool left) {
@@ -346,30 +464,15 @@ void acelerar(int v){
 }
 
 
-void receiveEvent(int howmany) { //int numBytes) {
-  //Serial.print("numbytes = ");
-  //Serial.println(numBytes);
-  //if(numBytes <= BUFFER_SIZE) { // Asegurarse de que la cantidad de bytes recibidos no exceda el tamaño del buffer
-    //for(int i = 0; i < numBytes; i++) {
-      //receivedData[i] = Wire.read(); // Leer los datos recibidos y almacenarlos en el buffer
-    //}
-  //}
-  //else{
-    // Si se reciben más datos de los que puede manejar el buffer, descartar los datos adicionales
-    //while (Wire.available()) {
-      //Wire.read();
-    //}
-  //}
+int receiveColor() {
+  Wire.requestFrom(0x08, 1); // Request 1 byte from the Nicla Vision
 
-  while (Wire.available()) {   // Loop through all received bytes
-    int received = Wire.read(); // Receive byte as an integer
-    if (received == 1) {
-      myservo.write(110);       // Turn servo to 130 degrees
-    } else if (received == 0) {
-      myservo.write(70);        // Turn servo to 30 degrees
-    } 
+  if (Wire.available()) {
+    int colorData = Wire.read(); // Read the received data
+    return colorData;
+  } else {
+    return -1; // Return -1 if no data received (indicates an error)
   }
-      
 }
 
 float medir_distancia(char dir){
