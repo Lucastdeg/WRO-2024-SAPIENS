@@ -153,7 +153,7 @@ Unfortunately the Nicla Vision we used could not be found or obtained in the app
 -VIN from the Nicla Vision to the 5V+ pin of the Nano Every
 
 Here are some pictures of the batteries and sensors that we use: 
-- [Batteries](v-photos/Electromechanical-Components/)
+- [Batteries](v-photos/Electromechanical_Components/)
 
 ## Power Management
 The battery power is separated in two parts. 
