@@ -90,6 +90,9 @@ Our code, available here, outlines the specific algorithms and logic used for co
 Color Detection Algorithm:
 The algorithm processes the camera feed to identify the presence of green or red. This involves filtering the image to isolate these colors and then using thresholding techniques to determine the direction.
 
+![image](https://github.com/user-attachments/assets/7844fdab-804c-47e1-aa19-511a60d0ce33)
+
+
 Obstacle Avoidance Routine:
 When the sensors detect an obstacle, the robot executes a series of steps to navigate around it. This includes stopping, scanning the surroundings, calculating an alternate path, and resuming its movement while continuing to rely on the color signals for direction.
 
