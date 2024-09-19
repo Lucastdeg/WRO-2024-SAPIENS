@@ -52,11 +52,17 @@ For our robotics competition, we developed an innovative navigation solution tha
 
 To enhance our robot's awareness and maneuverability, we integrated four ultrasonic sensors—three positioned at the front and one at the back. These sensors provide real-time distance measurements, enabling the robot to detect and avoid obstacles from multiple directions. Our approach demonstrates the synergy of vision technology, ultrasonic sensing, and precise control algorithms, resulting in a responsive and reliable robotic solution.
 
+![image](https://github.com/user-attachments/assets/e9f8a395-be12-45f0-88fb-03c9430b6a1d)
+
+
 ## Mobility 
 Our robot uses an Ackerman steering system, with this steering system we can make our robot do the turns that have to be done during the 3 rounds. But because of the shape of our chassis and the type of steering system we use, our robot can only turn up to a certain point. In the case of turning to the right, it can only turn 30 degrees and in the left one it can only turn 10 degrees.
 
 Here you can see the shape of the chassis of our robot as a guide:
 - [Chassis of our robot](v-photos/) 
+
+![image](https://github.com/user-attachments/assets/06266fbe-ed5f-4541-8f24-26ff544a4afd)
+
 
 Some of the problems we faced with the steering system is that we had to come up with a way for the robot to make the turns neither too tight nor too wide, to fix this we use ultrasonic sensors on the front, right and left side of the front of the robot that are detecting how far it started and how many degrees it has to move forward while it is turning. For example during the open challenge round we made the robot turn when one of the ultrasonic sensors on one of the sides stops detecting or detects a greater distance than it had detected during the straight line, the sensor that performs this action depends on whether it is the one on the right or left, when it is the one on the right is when the round is being performed clockwise and when it is the one on the left when it is counterclockwise. 
 
