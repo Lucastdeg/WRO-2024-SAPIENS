@@ -26,6 +26,9 @@ All the materials used to create our robot
 - Multiple 3d pieces whih can be found in the following directory
 [3d_files](models/3D_files/)
 
+![image](https://github.com/user-attachments/assets/36da70f1-b12e-4ae1-84f2-327f54b2dd69)
+
+
 ## Building instructions
 - Chasis (Motors and base): https://mp.weixin.qq.com/s/dOADMsXeo7Lxebgg0yiY5Q
 - Electronics (Circuit and battery): [The circuit diagram can be found in the schemes directory](schemes/)
