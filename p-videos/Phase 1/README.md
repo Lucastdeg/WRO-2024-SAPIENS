@@ -5,4 +5,6 @@
 - The performance video with the updated code and modified robot can be seen here: https://youtu.be/qd9tWg43uxo
 - The commentary video is still pretty good so I recommend watching it as well
 
+- You can watch the where we did the best time with the robot in the phase 1: https://youtu.be/xH5RVF6u7lg
+
 
