@@ -11,7 +11,17 @@ bool go = false;
 float R_tem;
 float L_tem;
 
+int umbralcount;
+
+float PrevB;
+float PrevF;
+float PrevR;
+float PrevL;
+
 bool turn_direction;
+
+bool true_turn = true;
+int counting_turns = 0;
 
 //Ultrasonic pins:
 const int ultra_R_echo = 7;
@@ -23,8 +33,10 @@ const int ultra_F_trig = 10;
 const int ultra_L_echo = 11;
 const int ultra_L_trig = 12;
 
-const int ultra_B_echo = 13;
-const int ultra_B_trig = 14;
+const int ultra_B_echo = 16;
+const int ultra_B_trig = 17;
+
+const int count_led = 14;
 
 unsigned long time_a, time_b, time_c, time_d;
 
@@ -112,6 +124,9 @@ void setup() {
     else pinMode(i, INPUT);
   }  
 
+  pinMode(16, INPUT);
+  pinMode(17, OUTPUT);
+
   //light indicators
   //pinMode(13, OUTPUT);
   //pinMode(14, OUTPUT);
@@ -133,32 +148,34 @@ void loop() {
   float dis_R_inicial = medir_distancia('R');
   float dis_L_inicial = medir_distancia('L');
 
-  delay(500);
-  first_turn(110, 86, 179);
+  umbralcount = 0;
+
+  delay(1000);
+  first_turn(151, 92, 176);
 
 
 
   if (turn_direction) {
-    for(int i=0; i<70; i++){
+    while (counting_turns < 12) { // 12
+      first_turn(148, 99, 165);
+    }
+  } else {
+    while (counting_turns < 12) { // 12
+      first_turn(148, 99, 165);
+    }
+  }
 
-      //change this to an infinite loop next time to check
-      first_turn(110, 88, 176);
-      //left_forwards(100, 80); //speed, umbral
-      //left_turn(105, 60, 1400); //speed, angle, time
-      //eventually add save crash Im adding this comment here so you dont forget
-    }
-  }
-  else {
-      for(int i=0; i<70; i++){
-        first_turn(110, 88, 176);
-        //breaking(3000);
-      //left_forwards(100, 80); //speed, umbral
-      //left_turn(105, 60, 1400); //speed, angle, time
-      //eventually add save crash Im adding this comment here so you dont forget
-    }
-  }
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 114);
+  delay(5500);
+
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, 110);
+  delay(100);
   
-  breaking(100);
+  breaking(300);
 
   delay(500);
   go = false;
@@ -172,21 +189,31 @@ void first_turn(int v, int umbral1, int umbral2) {
   R_tem = medir_distancia('R');
   L_tem = medir_distancia('L');
 
-  Regulator regular(0.21, 0, 45, 84); // 0.14
+  Regulator regular(0.20, 0, 45, 83); // 0.14
 
 
-  while (dis_F_tem > umbral1 and dis_B_tem < umbral2) {
+  while (dis_F_tem > (umbral1+5) and dis_B_tem < (umbral2-5)) {
+
+    umbralcount = 0;
+    float posicion = regular.Steer(R_tem, L_tem);
+
+    myservo.write(posicion);
+
+    if (true_turn) {
+      counting_turns = counting_turns + 1;
+      true_turn = false;
+      digitalWrite(count_led, HIGH);
+    }
 
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
     analogWrite(ENA, v);
     delay(20);
-    float posicion = regular.Steer(R_tem, L_tem);
 
-    myservo.write(posicion);
+    digitalWrite(count_led, LOW);
 
 
-    if (medir_distancia('L') > 150 or medir_distancia('R') > 150) {
+    if (medir_distancia('L') > 100 or medir_distancia('R') > 100) {
       break;
     }
     L_tem = medir_distancia('L');
@@ -225,7 +252,7 @@ void left_forwards(int v, int umbral) {
   R_tem = medir_distancia('R');
   L_tem = medir_distancia('L');
 
-  Regulator regular(0.18, 0, 45, 86);
+  Regulator regular(0.18, 0, 45, 83);
 
   myservo.write(86);
 
@@ -273,9 +300,24 @@ void left_turn(int v, int angle, int time) {
 void left_turn_end(int v, int angle) {
   float R = medir_distancia('R');
   float L = medir_distancia('L');
+  true_turn = true;
+  if (R > 100) {
+    R = 45;
+    PrevR = 45;
+  } else {
+    PrevR = R;
+  }
+  if (L > 100) {
+    L = 45;
+    PrevL = 45;
+  } else {
+    PrevL = L;
+  }
   float add = R+L;
+  
+  umbralcount = umbralcount+1;
 
-  while (add > 105 or add < 20) {
+  while ((add > 125 or add < 15) and umbralcount < 1) {
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
     analogWrite(ENA, v);
@@ -287,7 +329,21 @@ void left_turn_end(int v, int angle) {
     }
     R = medir_distancia('R');
     L = medir_distancia('L');
+
+
+    if (L > 100 or L < 4) {
+      L = PrevL;
+    } else {
+      PrevL = L;
+    }
+
+    if (R > 100 or R < 4) {
+      R = PrevR;
+    } else {
+      PrevR = R;
+    }
     add = R+L;
+    //digitalWrite(count_led, LOW);
     
   }
 
@@ -304,6 +360,7 @@ void save_crash(int v) {
     digitalWrite(IN2, LOW);
     delay(1300);
     myservo.write(86);
+    true_turn = false;
   }
 }
 
